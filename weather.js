@@ -257,7 +257,7 @@ function requestGeolocation() {
                 reject(error);
             },
             {
-                timeout: 10000,
+                timeout: 5000,
                 enableHighAccuracy: false
             }
         );
@@ -302,15 +302,16 @@ async function loadWeatherByGeolocation() {
         const coords = await requestGeolocation();
         console.log('Geolocation detected:', { latitude: coords.latitude, longitude: coords.longitude });
         
-        const locationName = await getReverseGeocoding(coords.latitude, coords.longitude);
-        console.log('Reverse geocoded location:', locationName);
-        
-        // Load weather data directly with coordinates to avoid extra API call
+        // Load weather data directly with coordinates (skip reverse geocoding for speed)
         showLoading();
         const weatherData = await fetchWeather(coords.latitude, coords.longitude);
-        displayWeather(weatherData, locationName);
-        cacheWeather(weatherData, locationName);
-        localStorage.setItem('lastWeatherLocation', locationName);
+        
+        // Store coordinates for later use
+        const locationName = `${coords.latitude.toFixed(2)}°, ${coords.longitude.toFixed(2)}°`;
+        displayWeather(weatherData, 'Your Location');
+        cacheWeather(weatherData, 'Your Location');
+        localStorage.setItem('lastWeatherLocation', 'Your Location');
+        localStorage.setItem('lastWeatherCoords', JSON.stringify(coords));
     } catch (error) {
         console.warn('Geolocation failed, falling back to default location:', error);
         // Fall back to default location
