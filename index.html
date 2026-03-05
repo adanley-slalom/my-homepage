@@ -13,6 +13,55 @@
         <img src="https://images.unsplash.com/photo-1706606999710-72658165a73d?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Profile Photo" class="profile-photo">
         <p class="description">This is my welcome message text. This content is for placeholder purposes only.</p>
         <button class="contact-btn">Contact Me</button>
+
+        <!-- Weather Widget -->
+        <section class="weather-widget" id="weather-widget">
+            <div class="weather-header">
+                <h2>Weather</h2>
+                <div class="location-search">
+                    <input 
+                        type="text" 
+                        id="location-input" 
+                        placeholder="Search location..." 
+                        class="location-input"
+                    >
+                    <button id="search-btn" class="search-btn">Search</button>
+                </div>
+            </div>
+
+            <div class="weather-content">
+                <!-- Loading State -->
+                <div id="loading" class="loading hidden">
+                    <p>Loading weather...</p>
+                </div>
+
+                <!-- Error State -->
+                <div id="error" class="error hidden">
+                    <p id="error-message">Unable to fetch weather data</p>
+                </div>
+
+                <!-- Current Weather -->
+                <div id="current-weather" class="current-weather hidden">
+                    <div class="location-name" id="location-name">Loading...</div>
+                    <div class="current-temp" id="current-temp">--°</div>
+                    <div class="current-condition" id="current-condition">--</div>
+                    <div class="current-details">
+                        <span class="detail">Wind: <span id="wind-speed">--</span> km/h</span>
+                    </div>
+                    <div class="last-updated" id="last-updated">Just now</div>
+                </div>
+
+                <!-- Forecast -->
+                <div id="forecast" class="forecast hidden">
+                    <h3>5-Day Forecast</h3>
+                    <div class="forecast-cards" id="forecast-cards">
+                        <!-- Forecast cards will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <script src="weather.js"></script>
 </body>
 </html>
