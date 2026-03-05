@@ -300,7 +300,10 @@ async function getReverseGeocoding(latitude, longitude) {
 async function loadWeatherByGeolocation() {
     try {
         const coords = await requestGeolocation();
+        console.log('Geolocation detected:', { latitude: coords.latitude, longitude: coords.longitude });
+        
         const locationName = await getReverseGeocoding(coords.latitude, coords.longitude);
+        console.log('Reverse geocoded location:', locationName);
         
         // Load weather data directly with coordinates to avoid extra API call
         showLoading();
